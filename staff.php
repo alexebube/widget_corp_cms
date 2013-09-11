@@ -1,4 +1,4 @@
-<?php include './includes/header.php'; ?>
+<?php include ("includes/header.php"); ?>
 			<table id="structure">
 				<tr>
 					<td id="navigation">
@@ -15,4 +15,4 @@
 					</td>
 				</tr>
 			</table>
-<?php include './includes/footer.php';?>
+<?php include ("includes/footer.php"); ?>
