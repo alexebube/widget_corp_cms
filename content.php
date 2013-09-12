@@ -21,12 +21,16 @@
                                                     // Use returned data
                                                     $subject_set = get_all_subjects();
                                                     while ($subject = mysql_fetch_array($subject_set)) {
-                                                        echo "<li><a href=\"content.php?subj=".urlencode($subject["id"])."\">{$subject["menu_name"]}</a></li>";
+                                                        echo " <li "; 
+                                                        if ($subject["id"] == $sel_subj) { echo " class=\"selected\" "; }
+                                                        echo "><a href=\"content.php?subj=".urlencode($subject["id"])."\">{$subject["menu_name"]}</a></li>";
                                                                                                                 
                                                         echo "<ul class=\"pages\">";
                                                         $page_set = get_pages_for_subject($subject["id"]);
                                                         while ($page = mysql_fetch_array($page_set)) {
-                                                            echo "<li><a href=\"content.php?page=".  urlencode($page["id"])."\">{$page["menu_name"]}</a></li>";
+                                                            echo " <li "; 
+                                                            if ($page["id"] == $sel_page) { echo "class=\"selected\" "; }
+                                                            echo "><a href=\"content.php?page=".urlencode($page["id"])."\">{$page["menu_name"]}</a></li>";
                                                         }
                                                         echo "</ul>";
                                                     }
