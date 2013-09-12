@@ -29,4 +29,31 @@ function get_pages_for_subject($subject_id) {
   confirm_query($page_set);
   return $page_set;
 }
+
+function get_subject_by_id($subject_id) {
+    global $connection;
+    $query = "SELECT * FROM subjects WHERE id = ".$subject_id." LIMIT 1";
+    $result_set = mysql_query($query, $connection);
+    confirm_query($result_set);
+    $subject = mysql_fetch_array($result_set);
+    if($subject){
+        return $subject;
+    }  else {
+        return NULL;
+    }
+}
+
+function get_page_by_id($page_id){
+    global $connection;
+    $query = "SELECT * FROM pages WHERE id = ".$page_id." LIMIT 1";
+    $result_set = mysql_query($query, $connection);
+    confirm_query($result_set);
+    $page = mysql_fetch_array($result_set);
+    if($page){
+        return $page;
+    }  else {
+        return NULL;
+    }
+}
+
 ?>
