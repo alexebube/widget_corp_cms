@@ -5,22 +5,14 @@
 				<tr>
 					<td id="navigation">
                                             <ul class="subjects">
-						<?php
-                                                    // Perform database query
-                                                    $subject_set = mysql_query("SELECT * FROM subjects", $connection);
-                                                    if (!$subject_set) {
-                                                            die("Database query failed: " . mysql_error());
-                                                    }
-
+						<?php                                                   
                                                     // Use returned data
+                                                    $subject_set = get_all_subjects();
                                                     while ($subject = mysql_fetch_array($subject_set)) {
                                                         echo "<li>{$subject["menu_name"]}</li>";
-                                                        $page_set = mysql_query("SELECT * FROM pages WHERE subject_id = {$subject["id"]}", $connection);
-                                                        if (!$page_set) {
-                                                                die("Database query failed: " . mysql_error());
-                                                        }
-                                                        
+                                                                                                                
                                                         echo "<ul class=\"pages\">";
+                                                        $page_set = get_pages_for_subject($subject["id"]);
                                                         while ($page = mysql_fetch_array($page_set)) {
                                                             echo "<li>{$page["menu_name"]}</li>";
                                                         }
