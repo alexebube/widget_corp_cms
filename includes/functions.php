@@ -55,5 +55,41 @@ function get_page_by_id($page_id){
         return NULL;
     }
 }
+function find_selected_page(){
+    global $sel_subject;
+    global $sel_page;
+    if (isset($_GET['subj'])){
+        $sel_subject = get_subject_by_id($_GET['subj']);
+        $sel_page = NULL;
+    }elseif (isset ($_GET['page'])) {
+        $sel_subject = NULL;
+        $sel_page = get_page_by_id($_GET['page']);
+    }  else {
+         $sel_subject = NULL;
+         $sel_page = NULL;
+    }
+}
 
+function navigation($sel_subject, $sel_page){
+        $output = "<ul class=\"subjects\"> ";                                                  
+        // Use returned data
+        $subject_set = get_all_subjects();
+        while ($subject = mysql_fetch_array($subject_set)) {
+        $output .= " <li "; 
+        if ($subject["id"] == $sel_subject["id"]) { $output .= " class=\"selected\" "; }
+        $output .= "><a href=\"content.php?subj=".urlencode($subject["id"])."\">{$subject["menu_name"]}</a></li>";
+                                                                                      
+        $output .= "<ul class=\"pages\">";
+        $page_set = get_pages_for_subject($subject["id"]);
+        while ($page = mysql_fetch_array($page_set)) {
+        $output .= " <li "; 
+        if ($page["id"] == $sel_page["id"]) { $output .= "class=\"selected\" "; }
+        $output .= "><a href=\"content.php?page=".urlencode($page["id"])."\">{$page["menu_name"]}</a></li>";
+        }
+        $output .= "</ul>";
+        }
+        $output .= "</ul>"; 
+        
+        return $output;
+}
 ?>
