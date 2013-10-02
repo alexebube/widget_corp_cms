@@ -98,7 +98,7 @@ function navigation($sel_subject, $sel_page){
         while ($subject = mysql_fetch_array($subject_set)) {
         $output .= " <li "; 
         if ($subject["id"] == $sel_subject["id"]) { $output .= " class=\"selected\" "; }
-        $output .= "><a href=\"content.php?subj=".urlencode($subject["id"])."\">{$subject["menu_name"]}</a></li>";
+        $output .= "><a href=\"edit_subject.php?subj=".urlencode($subject["id"])."\">{$subject["menu_name"]}</a></li>";
                                                                                       
         $output .= "<ul class=\"pages\">";
         $page_set = get_pages_for_subject($subject["id"]);
